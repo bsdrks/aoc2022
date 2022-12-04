@@ -326,7 +326,7 @@ fn main() {
                 let c = chunk[2].chars().collect::<HashSet<char>>();
 
                 a.intersection(&b)
-                    .map(std::borrow::ToOwned::to_owned)
+                    .map(ToOwned::to_owned)
                     .collect::<HashSet<char>>()
                     .intersection(&c)
                     .map(|c| char_to_usize(*c))

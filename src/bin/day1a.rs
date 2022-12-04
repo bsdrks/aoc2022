@@ -2225,17 +2225,18 @@ const INPUT: &str = "
 ";
 
 fn main() {
-    let input = INPUT.trim().split("\n\n");
-
-    let max = input
-        .map(|group| {
-            group
-                .lines()
-                .map(|l| l.parse::<u64>().unwrap())
-                .sum::<u64>()
-        })
-        .max()
-        .unwrap();
-
-    println!("{:?}", max);
+    println!(
+        "{}",
+        INPUT
+            .trim()
+            .split("\n\n")
+            .map(|group| {
+                group
+                    .lines()
+                    .map(|l| l.parse::<u64>().unwrap())
+                    .sum::<u64>()
+            })
+            .max()
+            .unwrap()
+    );
 }

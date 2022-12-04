@@ -2241,5 +2241,5 @@ fn main() {
 
     let total = elves[0..3].iter().sum::<u64>();
 
-    println!("{:?}", total);
+    println!("{total:?}");
 }
