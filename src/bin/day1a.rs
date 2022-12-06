@@ -2230,12 +2230,10 @@ fn main() {
         INPUT
             .trim()
             .split("\n\n")
-            .map(|group| {
-                group
-                    .lines()
-                    .map(|l| l.parse::<u64>().unwrap())
-                    .sum::<u64>()
-            })
+            .map(|group| group
+                .lines()
+                .map(|l| l.parse::<u64>().unwrap())
+                .sum::<u64>())
             .max()
             .unwrap()
     );

@@ -2225,9 +2225,9 @@ const INPUT: &str = "
 ";
 
 fn main() {
-    let input = INPUT.trim().split("\n\n");
-
-    let mut elves = input
+    let mut elves = INPUT
+        .trim()
+        .split("\n\n")
         .map(|group| {
             group
                 .lines()
@@ -2239,7 +2239,5 @@ fn main() {
     elves.sort_unstable();
     elves.reverse();
 
-    let total = elves[0..3].iter().sum::<u64>();
-
-    println!("{total:?}");
+    println!("{}", elves[0..3].iter().sum::<u64>());
 }

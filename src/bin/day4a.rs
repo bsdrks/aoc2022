@@ -1009,10 +1009,9 @@ fn main() {
             .lines()
             .filter(|l| {
                 let mut pairs = l.split(',').map(|p| {
-                    let mut parts = p.split('-');
+                    let mut parts = p.split('-').map(|x| x.parse::<u64>().unwrap());
 
-                    parts.next().unwrap().parse::<u64>().unwrap()
-                        ..=parts.next().unwrap().parse::<u64>().unwrap()
+                    parts.next().unwrap()..=parts.next().unwrap()
                 });
 
                 let a = pairs.next().unwrap();
