@@ -530,7 +530,7 @@ fn parse(s: &str) -> Vec<VecDeque<char>> {
     ];
 
     for l in s.lines() {
-        for (i, chunk) in l.chars().collect::<Vec<char>>().chunks(4).enumerate() {
+        for (i, chunk) in l.chars().collect::<Vec<_>>().chunks(4).enumerate() {
             let c = chunk[1];
 
             if c.is_alphabetic() {
