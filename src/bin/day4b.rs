@@ -1,3 +1,5 @@
+#![deny(clippy::all, clippy::pedantic, clippy::nursery)]
+
 const INPUT: &str = "
 24-91,80-92
 28-93,5-94

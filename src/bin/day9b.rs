@@ -1,3 +1,5 @@
+#![deny(clippy::all, clippy::pedantic, clippy::nursery)]
+
 use std::{cmp::Ordering, collections::HashSet};
 
 const INPUT: &str = "

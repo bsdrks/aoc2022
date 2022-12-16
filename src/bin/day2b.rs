@@ -1,3 +1,5 @@
+#![deny(clippy::all, clippy::pedantic, clippy::nursery)]
+
 use std::str::FromStr;
 
 const INPUT: &str = "

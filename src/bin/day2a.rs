@@ -1,3 +1,5 @@
+#![deny(clippy::all, clippy::pedantic, clippy::nursery)]
+
 use std::str::FromStr;
 
 const INPUT: &str = "
@@ -2556,20 +2558,4 @@ fn main() {
                 .collect::<Vec<(Choice, Choice)>>(),
         )
     );
-}
-
-#[cfg(test)]
-mod test {
-    use super::*;
-
-    #[test]
-    fn test_solve() {
-        let games = vec![
-            (Choice::Rock, Choice::Paper),
-            (Choice::Paper, Choice::Rock),
-            (Choice::Scissors, Choice::Scissors),
-        ];
-
-        assert_eq!(solve(&games), 8 + 1 + 6);
-    }
 }
