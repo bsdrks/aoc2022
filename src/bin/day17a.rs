@@ -1,4 +1,4 @@
-#![deny(clippy::all, clippy::nursery)]
+#![deny(clippy::all, clippy::pedantic, clippy::nursery)]
 
 use std::{collections::HashSet, ops::Add};
 
@@ -62,17 +62,6 @@ pub enum Rock {
 
 impl Rock {
     #[must_use]
-    pub const fn next(self) -> Self {
-        match self {
-            Self::Minus => Self::Plus,
-            Self::Plus => Self::L,
-            Self::L => Self::Pipe,
-            Self::Pipe => Self::Square,
-            Self::Square => Self::Minus,
-        }
-    }
-
-    #[must_use]
     pub fn points(&self) -> HashSet<Point> {
         match self {
             Self::Minus => vec![(0, 0), (1, 0), (2, 0), (3, 0)],
@@ -86,6 +75,7 @@ impl Rock {
         .collect()
     }
 
+    #[must_use]
     pub fn index(index: usize) -> Self {
         match index % 5 {
             0 => Self::Minus,
@@ -145,11 +135,11 @@ impl Simulation {
             let jet = self.turn % self.jets.len();
             let rock = Rock::index(self.dropped);
 
-            match self.jets[jet] {
-                Jet::Left if !self.free(rock, point!(-1, 0)) => {
+            match self.jets.get(jet) {
+                Some(Jet::Left) if !self.free(rock, point!(-1, 0)) => {
                     self.pos.x -= 1;
                 }
-                Jet::Right if !self.free(rock, point!(1, 0)) => {
+                Some(Jet::Right) if !self.free(rock, point!(1, 0)) => {
                     self.pos.x += 1;
                 }
                 _ => {}

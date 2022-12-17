@@ -65,17 +65,6 @@ pub enum Rock {
 
 impl Rock {
     #[must_use]
-    pub const fn next(self) -> Self {
-        match self {
-            Self::Minus => Self::Plus,
-            Self::Plus => Self::L,
-            Self::L => Self::Pipe,
-            Self::Pipe => Self::Square,
-            Self::Square => Self::Minus,
-        }
-    }
-
-    #[must_use]
     pub fn points(&self) -> HashSet<Point> {
         match self {
             Self::Minus => vec![(0, 0), (1, 0), (2, 0), (3, 0)],
