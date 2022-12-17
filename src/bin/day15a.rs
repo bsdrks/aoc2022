@@ -47,9 +47,11 @@ fn solve(input: &str) -> usize {
             let possible_beacon = (*x, 2_000_000);
 
             pairs.iter().any(|(sensor, beacon)| {
+                let diff =
+                    |(x1, y1): (i64, i64), (x2, y2): (i64, i64)| x1.abs_diff(x2) + y1.abs_diff(y2);
+
                 beacon == &possible_beacon
-                    || ((sensor.0 - possible_beacon.0).abs() + (sensor.1 - possible_beacon.1).abs()
-                        <= (sensor.0 - beacon.0).abs() + (sensor.1 - beacon.1).abs())
+                    || diff(*sensor, possible_beacon) <= diff(*sensor, *beacon)
             })
         })
         .count()
