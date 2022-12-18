@@ -1,3 +1,5 @@
+#![deny(clippy::all, clippy::pedantic, clippy::nursery)]
+
 use std::{collections::HashSet, str::FromStr};
 
 pub const INPUT: &str = "
@@ -2762,6 +2764,7 @@ pub struct Cube {
 }
 
 impl Cube {
+    #[must_use]
     pub const fn new(position @ (x, y, z): (i64, i64, i64)) -> Self {
         let x = x * 2;
         let y = y * 2;
@@ -2810,7 +2813,7 @@ fn solve(input: &str) -> usize {
 
     n - (n - sides
         .iter()
-        .cloned()
+        .copied()
         .collect::<HashSet<(i64, i64, i64)>>()
         .len())
         * 2

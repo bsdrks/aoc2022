@@ -1,3 +1,5 @@
+#![deny(clippy::all, clippy::pedantic, clippy::nursery)]
+
 use std::{
     collections::{HashSet, VecDeque},
     ops::RangeInclusive,
@@ -2766,6 +2768,7 @@ pub struct Cube {
 }
 
 impl Cube {
+    #[must_use]
     pub const fn new(position @ (x, y, z): (i64, i64, i64)) -> Self {
         let x = x * 2;
         let y = y * 2;
