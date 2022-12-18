@@ -84,17 +84,15 @@ fn fill(
     queue.push_back(start);
 
     while let Some(position @ (x, y, z)) = queue.pop_front() {
-        if !x_range.contains(&x)
-            || !y_range.contains(&y)
-            || !z_range.contains(&z)
-            || water.contains(&position)
-            || cube_positions.contains(&position)
+        if x_range.contains(&x)
+            && y_range.contains(&y)
+            && z_range.contains(&z)
+            && !water.contains(&position)
+            && !cube_positions.contains(&position)
         {
-            continue;
+            water.insert(position);
+            queue.extend(Cube::sides(position));
         }
-
-        water.insert(position);
-        queue.extend(Cube::sides(position));
     }
 
     water
