@@ -39,15 +39,20 @@ impl Cube {
 
         Self {
             position,
-            sides: [
-                (x - 1, y, z),
-                (x + 1, y, z),
-                (x, y - 1, z),
-                (x, y + 1, z),
-                (x, y, z - 1),
-                (x, y, z + 1),
-            ],
+            sides: Self::sides((x, y, z)),
         }
+    }
+
+    #[must_use]
+    pub const fn sides((x, y, z): (i64, i64, i64)) -> [(i64, i64, i64); 6] {
+        [
+            (x - 1, y, z),
+            (x + 1, y, z),
+            (x, y - 1, z),
+            (x, y + 1, z),
+            (x, y, z - 1),
+            (x, y, z + 1),
+        ]
     }
 }
 
@@ -78,24 +83,18 @@ fn fill(
 
     queue.push_back(start);
 
-    while let Some((x, y, z)) = queue.pop_front() {
+    while let Some(position @ (x, y, z)) = queue.pop_front() {
         if !x_range.contains(&x)
             || !y_range.contains(&y)
             || !z_range.contains(&z)
-            || water.contains(&(x, y, z))
-            || cube_positions.contains(&(x, y, z))
+            || water.contains(&position)
+            || cube_positions.contains(&position)
         {
             continue;
         }
 
-        water.insert((x, y, z));
-
-        queue.push_back((x - 1, y, z));
-        queue.push_back((x + 1, y, z));
-        queue.push_back((x, y - 1, z));
-        queue.push_back((x, y + 1, z));
-        queue.push_back((x, y, z - 1));
-        queue.push_back((x, y, z + 1));
+        water.insert(position);
+        queue.extend(Cube::sides(position));
     }
 
     water
